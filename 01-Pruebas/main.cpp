@@ -1,11 +1,8 @@
 #include <iostream>
 #include "pid.h"
 
-TPID pid;
+PID pid;
 int main() {
-    pid.kp=0;
-    pid.td=0;
-    pid.ti=0;
     int op=0;
 
     do{
@@ -14,19 +11,19 @@ int main() {
         std::cin >> op;
         switch(op){
             case 1:{
-                printPID(pid);
+                pid.printPID(pid);
                 break;
             }
             case 2:{
-                changePID(pid);
+                pid.changePID(pid);
                 break;
             }
             case 3:{
-                savefilePID(pid);
+                pid.savefilePID(pid);
                 break;
             }
             case 4:{
-                loadfilePID(pid);
+                pid.loadfilePID(pid);
                 break;
             }
             case 5:{
