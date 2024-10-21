@@ -7,21 +7,53 @@
 #include <cstring>
 #include "pid.h"
 
-void printPID(TPID &p){
-    std::cout << "PID\t Kp->" << p.kp << "\t Td->" << p.td << "\t Ti->" << p.ti << "\n" << std::endl;
+PID::PID(){
+    kp=0;
+    td=0;
+    ti=0;
 }
 
-void changePID(TPID &p){
+int PID::getKp() const {
+    return kp;
+}
+void PID::setKp(int kp) {
+    PID::kp = kp;
+}
+int PID::getTd() const {
+    return td;
+}
+void PID::setTd(int td) {
+    PID::td = td;
+}
+int PID::getTi() const {
+    return ti;
+}
+void PID::setTi(int ti) {
+    PID::ti = ti;
+}
+
+void PID::printPID(PID &p){
+    std::cout << "PID\t Kp->" << p.getKp() << "\t Td->" << p.getTd() << "\t Ti->" << p.getTi() << "\n" << std::endl;
+}
+
+
+void PID::changePID(PID &p){
+    int nkp;
+    int nti;
+    int ntd;
     std::cout << "Introduce valor de kp:" << std::endl;
-    std::cin >> p.kp;
+    std::cin >> nkp;
+    p.setKp(nkp);
     std::cout << "Introduce valor de td:" << std::endl;
-    std::cin >> p.td;
+    std::cin >> ntd;
+    p.setTd(ntd);
     std::cout << "Introduce valor de ti:" << std::endl;
-    std::cin >> p.ti;
+    std::cin >> nti;
+    p.setTi(nti);
     std::cout << std::endl;
 }
 
-void loadfilePID(TPID &p){
+void PID::loadfilePID(PID &p){
     char file[50];
     char *ext=".txt";
     std::cout << "Introduce el nombre del fichero:" << std::endl;
@@ -29,7 +61,7 @@ void loadfilePID(TPID &p){
     strcat(file,ext);
     std::ifstream txt(file);
     if (txt.is_open()){
-        txt >> p.kp >> p.td >> p.ti;
+        txt >> kp >> td >> ti;
         txt.close();
     }
     else{
@@ -37,7 +69,7 @@ void loadfilePID(TPID &p){
     }
 }
 
-void savefilePID(TPID &p){
+void PID::savefilePID(PID &p){
     char file[50];
     char *ext=".txt";
     std::cout << "Introduce el nombre del fichero:" << std::endl;
@@ -45,7 +77,7 @@ void savefilePID(TPID &p){
     strcat(file,ext);
     std::ofstream txt(file);
     if (txt.is_open()){
-        txt << p.kp <<" "<< p.td <<" "<< p.ti << std::endl;
+        txt << p.getKp() <<" "<< p.getTd() <<" "<< p.getTi() << std::endl;
         txt.close();
     }
     else{
